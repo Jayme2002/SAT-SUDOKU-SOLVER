@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
 import sys
 
-
+# Function to map Sudoku cell indices (i, j, k) to a variable number
 def variable(i, j, k):
     res = 81 * (i - 1) + 9 * (j - 1) + (k - 1) + 1
-    
     return res
 
-
+# Function to map a variable number back to Sudoku cell indices (i, j, k)
 def inverse_variable(variable):
     variable -= 1  # Adjust back by subtracting 1
     k = (variable % 9) + 1
@@ -15,24 +14,23 @@ def inverse_variable(variable):
     i = (variable // 81) + 1
     return i, j, k
 
-
+# Encode that every cell has a number
 def encode_every_cell_has_number(vars_set):
-  
+    # Initialize clauses list
     clauses = []
     for i in range(1, 10):
         for j in range(1, 10):
             cell_clauses = []
             for k in range(1, 10):
-
                 X_ijk = variable(i, j, k)
                 vars_set.add(X_ijk)
                 cell_clauses.append(X_ijk)
             clauses.append(cell_clauses)
     return clauses
 
-
+# Encode that each number appears at most once in each row
 def encode_unique_numbers_in_rows(vars_set):
-   
+    # Initialize clauses list
     clauses = []
     for i in range(1, 10):
         for k in range(1, 10):
@@ -45,9 +43,9 @@ def encode_unique_numbers_in_rows(vars_set):
                     clauses.append([-X_ijk, -X_ilk])
     return clauses
 
-
+# Encode that each number appears at most once in each column
 def encode_unique_numbers_in_cols(vars_set):
-    
+    # Initialize clauses list
     clauses = []
     for j in range(1, 10):
         for k in range(1, 10):
@@ -60,9 +58,9 @@ def encode_unique_numbers_in_cols(vars_set):
                     clauses.append([-X_ijk, -X_ljk])
     return clauses
 
-
+# Encode prefilled cells in Sudoku grid
 def encode_prefilled_cells(sudoku_grid, vars_set):
-   
+    # Initialize clauses list
     clauses = []
     for i, row in enumerate(sudoku_grid, start=1):
         for j, cell in enumerate(row, start=1):
@@ -73,9 +71,9 @@ def encode_prefilled_cells(sudoku_grid, vars_set):
                 clauses.append([X_ijk])  # Add a clause to lock this cell to its value
     return clauses
 
-
+# Encode that each number appears at most once in each sub-grid
 def encode_number_at_most_once_in_every_sub_grid(set_of_vars):
-   
+    # Initialize clauses list
     clauses = []
     for k in range(1, 10):
         for a in range(0, 3):
@@ -102,7 +100,9 @@ def encode_number_at_most_once_in_every_sub_grid(set_of_vars):
                                 clauses.append([-v1, -v2])
     return clauses
 
+# Encode that each cell has at most one number
 def encode_at_most_one_number_per_cell(vars_set):
+    # Initialize clauses list
     clauses = []
     for i in range(1, 10):
         for j in range(1, 10):
@@ -112,12 +112,12 @@ def encode_at_most_one_number_per_cell(vars_set):
                     X_ijk2 = variable(i, j, k2)
                     vars_set.add(X_ijk1)
                     vars_set.add(X_ijk2)
-                    # If k1 is in the cell, k2 cannot be, and vice versa
                     clauses.append([-X_ijk1, -X_ijk2])
     return clauses
 
-
+# Encode that each number appears at least once in each row
 def encode_every_number_at_least_once_in_rows(vars_set):
+    # Initialize clauses list
     clauses = []
     for i in range(1, 10):
         for k in range(1, 10):
@@ -129,8 +129,9 @@ def encode_every_number_at_least_once_in_rows(vars_set):
             clauses.append(row_clause)
     return clauses
 
-
+# Encode that each number appears at least once in each column
 def encode_every_number_at_least_once_in_cols(vars_set):
+    # Initialize clauses list
     clauses = []
     for j in range(1, 10):
         for k in range(1, 10):
@@ -142,7 +143,9 @@ def encode_every_number_at_least_once_in_cols(vars_set):
             clauses.append(col_clause)
     return clauses
 
+# Encode that each number appears at least once in each sub-grid
 def encode_every_number_at_least_once_in_sub_grids(vars_set):
+    # Initialize clauses list
     clauses = []
     for k in range(1, 10):
         for a in range(0, 3):
@@ -156,6 +159,7 @@ def encode_every_number_at_least_once_in_sub_grids(vars_set):
                 clauses.append(sub_grid_clause)
     return clauses
 
+# Main function to encode the entire Sudoku puzzle
 def encode_sudoku(sudoku_grid):
     clauses = []
     set_of_vars = set()
@@ -172,7 +176,7 @@ def encode_sudoku(sudoku_grid):
     clauses.extend(encode_every_number_at_least_once_in_sub_grids(set_of_vars))
     return clauses, set_of_vars
 
-
+# Function to convert clauses into DIMACS format
 def convert_into_dimac(clauses, set_of_vars):
     """
     p cnf <# variables> <# clauses>
@@ -189,18 +193,17 @@ def convert_into_dimac(clauses, set_of_vars):
     so #variables would probably be the number of distinct integers
     and the #clauses would be the length of each clause
     """
-  
     res = f"p cnf {len(set_of_vars)} {len(clauses)}"
     for c in clauses:
         res += "\n"
         res += " ".join([str(num) for num in c]) + " 0"
     return res
 
-
 if __name__ == "__main__":
-
+    # Read Sudoku input from stdin
     soduko_input = sys.stdin.read()
 
+    # Parse Sudoku input
     parsed_soduko_input = ""
     for c in soduko_input:
         if c.isdigit() or c in ("?", ".", "*"):
@@ -209,11 +212,13 @@ if __name__ == "__main__":
     soduko_input = parsed_soduko_input
 
     soduko_grid = []
+    # Convert Sudoku input into a 2D grid
     for i in range(9):
         row = soduko_input[i * 9 : i * 9 + 9]
         row = list(row)
         soduko_grid.append(row)
 
+    # Encode Sudoku puzzle and get DIMACS format
     clauses, vars_set = encode_sudoku(soduko_grid)
     dimac_format = convert_into_dimac(clauses, vars_set)
     print(dimac_format)
