@@ -37,8 +37,8 @@ After executing the above commands the solved sudoku puzzle will be output to th
 *KEEP IN MIND MINISAT EXECUTABLE MUST BE INSTALLED TO RUN PROPERLY*
 
 ## **Example**
-<div align="center">
-  <img width="109" alt="Screenshot 2024-02-29 at 2 00 06 PM" src="https://github.com/Jayme2002/SAT-SUDOKU-SOLVER/assets/132419605/360681fa-593c-4ab3-8bfa-194f671a5fa3" style="display: inline-block; margin-right: 10px;">
+<div>
+  <img width="112" alt="Screenshot 2024-02-29 at 2 00 06 PM" src="https://github.com/Jayme2002/SAT-SUDOKU-SOLVER/assets/132419605/360681fa-593c-4ab3-8bfa-194f671a5fa3" style="display: inline-block; margin-right: 10px;">
   <img width="112" alt="Screenshot 2024-02-29 at 2 04 03 PM" src="https://github.com/Jayme2002/SAT-SUDOKU-SOLVER/assets/132419605/a9d48abc-3877-4dcf-8985-952f9fce8370" style="display: inline-block;">
 </div>
 
