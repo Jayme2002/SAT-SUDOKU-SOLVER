@@ -38,8 +38,9 @@ After executing the above commands the solved sudoku puzzle will be output to th
 
 ## **Example**
 <div>
-  <img width="112" alt="Screenshot 2024-02-29 at 2 00 06 PM" src="https://github.com/Jayme2002/SAT-SUDOKU-SOLVER/assets/132419605/360681fa-593c-4ab3-8bfa-194f671a5fa3" style="display: inline-block; margin-right: 10px;">
-  <img width="200" alt="Screenshot 2024-02-29 at 2 04 03 PM" src="https://github.com/Jayme2002/SAT-SUDOKU-SOLVER/assets/132419605/a9d48abc-3877-4dcf-8985-952f9fce8370" style="display: inline-block;">
+<img width="86" alt="Screenshot 2024-02-29 at 2 28 10 PM" src="https://github.com/Jayme2002/SAT-SUDOKU-SOLVER/assets/132419605/51430609-351e-4612-aec3-129b40ca0ebd"><img width="93" alt="Screenshot 2024-02-29 at 2 28 38 PM" src="https://github.com/Jayme2002/SAT-SUDOKU-SOLVER/assets/132419605/02d898c5-3c96-48ff-9870-5992f6391109">
+
+
 </div>
 
 ##**How to Use Parser**
