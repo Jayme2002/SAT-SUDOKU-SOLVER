@@ -37,13 +37,14 @@ After executing the above commands the solved sudoku puzzle will be output to th
 *KEEP IN MIND MINISAT EXECUTABLE MUST BE INSTALLED TO RUN PROPERLY*
 
 ## **Example**
+Puzzle/Solution
 <div>
 <img width="86" alt="Screenshot 2024-02-29 at 2 28 10 PM" src="https://github.com/Jayme2002/SAT-SUDOKU-SOLVER/assets/132419605/51430609-351e-4612-aec3-129b40ca0ebd"><img width="93" alt="Screenshot 2024-02-29 at 2 28 38 PM" src="https://github.com/Jayme2002/SAT-SUDOKU-SOLVER/assets/132419605/02d898c5-3c96-48ff-9870-5992f6391109">
 
 
 </div>
 
-##**How to Use Parser**
+## **How to Use Parser**
 
 **Step 1: Make sure Script can be executed**
 Run the command: chmod u+x parse.py
